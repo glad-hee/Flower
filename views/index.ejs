@@ -1,12 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <script defer src="/static/js/index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap-grid.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
-    <h1>hi</h1>
+    <div
+      class="bb-container container-fluid g-0 col-md-offset-4 col-md-6"
+      id="body"
+    >
+      <header class="row bb-header col-xs-10 m-0">
+        <div class="bb-logo-title">
+          <img src="/static/src/abc.png" alt="logo" class="logo-image" />
+        </div>
+
+        <div class="bb-btn-wrap row flex-nowrap">
+          <div
+            class="bb-btn1 col-sm-3 col-md-3 grey2"
+            onclick="filterItem('all')"
+          >
+            전체 보기
+          </div>
+          <div
+            class="bb-btn2 col-sm-3 col-md-3 grey3"
+            onclick="filterItem('best')"
+          >
+            BEST
+          </div>
+          <div
+            class="bb-btn3 col-sm-3 col-md-3 grey2"
+            onclick="filterItem('new')"
+          >
+            NEW
+          </div>
+          <div
+            class="bb-btn3 col-sm-3 col-md-3 grey5"
+            onclick="filterItem('sale')"
+          >
+            SALE
+          </div>
+        </div>
+      </header>
+      <div class="row main justify-content-center text-center">
+        <div class="bb-main-item-wrap col-md-offset-1 col-md-10 grey4">
+          <!--      아이템 컨테이너-->
+          <div class="row bb-main-item-container text-center">
+            <!--        개별 아이템-->
+            <div class="bb-main-item col-sm-6 col-md-4 all sale">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/해바라기.jpg"
+                    alt="ff"
+                    onclick="openModal(0)"
+                  />
+                </div>
+                <p class="bb-item-title">해바라기</p>
+                <div class="bb-item-price">₩25,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all best new">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/봄스폐셜.jpg"
+                    alt=""
+                    onclick="openModal(1)"
+                  />
+                </div>
+                <p class="bb-item-title">봄 스폐셜</p>
+                <div class="bb-item-price">₩34,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/튤립.jpg"
+                    alt=""
+                    onclick="openModal(2)"
+                  />
+                </div>
+                <p class="bb-item-title">노랑 튤립</p>
+                <div class="bb-item-price">₩21,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all sale">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/설유화.jpg"
+                    alt=""
+                    onclick="openModal(3)"
+                  />
+                </div>
+                <p class="bb-item-title">설유화</p>
+                <div class="bb-item-price">₩24,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all best sale">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/수국리시안셔스장미.jpg"
+                    alt=""
+                    onclick="openModal(4)"
+                  />
+                </div>
+                <p class="bb-item-title">리시안서스</p>
+                <div class="bb-item-price">₩29,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all best new">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/만천홍.jpg"
+                    alt=""
+                    onclick="openModal(5)"
+                  />
+                </div>
+                <p class="bb-item-title">만천홍</p>
+                <div class="bb-item-price">₩21,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all sale">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/호접란.jpg"
+                    alt=""
+                    onclick="openModal(6)"
+                  />
+                </div>
+                <p class="bb-item-title">호접란</p>
+                <div class="bb-item-price">₩20,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all best new">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/호접란(화이트).jpg"
+                    alt=""
+                    onclick="openModal(7)"
+                  />
+                </div>
+                <p class="bb-item-title">호접란(화이트)</p>
+                <div class="bb-item-price">₩22,000</div>
+              </div>
+            </div>
+            <div class="bb-main-item col-sm-6 col-md-4 all best sale">
+              <div class="bb-item-details grey1 m-3">
+                <div class="bb-item-img">
+                  <img
+                    src="/static/src/호접란(삼색조).jpg"
+                    alt=""
+                    onclick="openModal(8)"
+                  />
+                </div>
+                <p class="bb-item-title">호접란(삼색조)</p>
+                <div class="bb-item-price">₩23,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  하단 결제 버튼 페이지-->
+      <footer class="footer">
+        <div class="row">
+          <!--    구매내역 / 장바구니 -->
+          <div class="bb-history col-md-7 grey3 cart">
+            <p class="bb-total">Order</p>
+            <ul class="cart-items"></ul>
+            <p class="bb-sum cart-total"></p>
+          </div>
+          <!--    결제관련 버튼 -->
+          <div class="bb-proceed-btn col-md-5 grey2 row">
+            <div class="col-sm-12 col-md-6">
+              <!-- 다음페이지 링크 달것 -->
+              <button
+                type="button"
+                onclick="location.href='page2.html'"
+                class="bb-buy-btn"
+                id="checkout"
+              >
+                Check out
+              </button>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <button type="button" id="reset" onclick="resetCart()">
+                Reset
+              </button>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <button type="button" id="coupon" onclick="openCouponModal()">
+                Coupon
+              </button>
+            </div>
+            <div class="search-container col-sm-6 col-md-6">
+              <input type="text" id="search-input" placeholder="Flower Name" />
+              <button type="button" id="search-button" onclick="searchItems()">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- 꽃 선택시 modal창 -->
+    <div class="product product1" id="modal">
+      <div class="modal-container">
+        <img id="modal-image" src="" alt="" />
+
+        <h3></h3>
+        <br />
+        <p id="product-price"></p>
+        <br />
+        <div>
+          <button id="purchase" onclick="addToCart()">Add</button>
+          <button class="close" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
