@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="view-transition" content="same-origin" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap-grid.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/page2.css" />
+    <link rel="stylesheet" href="/static/css/common.css" />
+    <style>
+      .list {
+        display: flex;
+        justify-items: center;
+        justify-content: space-evenly;
+        /* border: 1px solid red; */
+        padding: 10px;
+      }
+      .minus-btn,
+      .plus-btn,
+      .delete-btn {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="bb-container container-fluid g-0 col-md-offset-4 col-md-6 color3"
+    >
+      <header class="row bb-header col-xs-10 m-0">
+        <div class="bb-logo-title">
+          <img src="/static/src/abc.png" alt="logo" class="logo-image" />
+        </div>
+        <div class="bb-btn-wrap row flex-nowrap"></div>
+      </header>
+      <!--  구매내역 + 구매하기 버튼-->
+      <div class="row main justify-content-center text-center">
+        <div class="bb-main-item-wrap col-md-offset-1 col-md-10">
+          <!--      아이템 컨테이너-->
+          <div class="row bb-buy-contents color1 text-center g-0">
+            <!-- 장바구니 내역-->
+            구매내역
+            <div id="overlay"></div>
+          </div>
+        </div>
+        <div class="bb-buy-btn-wrap row col-md-10">
+          <div class="bb-left-btn col-sm-12">
+            <button class="bb-pick-up color6">구매하기 ( 픽업 )</button>
+          </div>
+          <!--      <div class="bb-right-btn  col-sm-6">-->
+          <!--        <button class="bb-delivery"> 장바구니 "배송" 받기 버튼</button>-->
+          <!--      </div>-->
+        </div>
+      </div>
+      <div class="bb-detail row justify-content-center text-center">
+        <div class="col-md-12 center">
+          <div class="first-page off color0">
+            <p>주문자 핸드폰 번호를 입력해 주세요.</p>
+            <input
+              type="text"
+              id="phone-number"
+              placeholder="01012345678"
+              readonly
+            />
+            <div class="btn-wrap">
+              <button id="reset">지우기</button>
+              <button class="number" id="number-0">0</button>
+              <button class="number" id="number-1">1</button>
+              <button class="number" id="number-2">2</button>
+              <button class="number" id="number-3">3</button>
+              <button class="number" id="number-4">4</button>
+              <button class="number" id="number-5">5</button>
+              <button class="number" id="number-6">6</button>
+              <button class="number" id="number-7">7</button>
+              <button class="number" id="number-8">8</button>
+              <button class="number" id="number-9">9</button>
+              <button id="confirm">확인</button>
+            </div>
+            <div id="error" class="off">입력하신 번호가 올바르지 않습니다.</div>
+          </div>
+          <div class="second-page off color0">
+            입력하신 정보가 맞습니까?
+            <div class="checkNumber">010-0000-0000</div>
+            <div class="btn-wrap">
+              <button id="approve">예</button>
+              <button id="reject">아니오</button>
+            </div>
+          </div>
+          <div class="third-page off color0">
+            <p>주문자의 주문번호는 46 입니다.</p>
+            <p>
+              주문 조회는 주문번호 혹은 핸드폰 번호로 조회 하실 수 있습니다.
+            </p>
+            <button id="proceed">결제 하기</button>
+            <button class="back" id="back3">뒤로 가기</button>
+          </div>
+          <div class="fourth-page off color0">
+            <p>지금 현재위치에서 받으실 수 있는 픽업 주소는 다음과 같습니다.</p>
+            <h3>서울특별시 마포구 숭문4길6</h3>
+            <h4>염리동 147-20 04138</h4>
+            <p>픽업시 주문번호 혹은 핸드폰 번호를 알려주세요.</p>
+            <button id="okay">알겠습니다.</button>
+            <button class="back" id="back4">뒤로가기</button>
+          </div>
+        </div>
+        <script>
+          const cart = {
+            items: [
+              {
+                id: 1,
+                name: "테스트꽃",
+                price: 10000,
+                quantity: 3,
+                totalPrice: 1,
+              },
+              {
+                id: 2,
+                name: "테스트꽃2",
+                price: 1000,
+                quantity: 5,
+                totalPrice: 2,
+              },
+              {
+                id: 3,
+                name: "테스트꽃3",
+                price: 500,
+                quantity: 9,
+                totalPrice: 3,
+              },
+            ],
+            total: 9,
+            quantity: 0,
+          };
+
+          // 아이템 갯수마다 열 생성 하는 함수
+          function makingRow(v, i) {
+            // list 클래스를 가진 div 태그 생성
+            const list = document.createElement("div");
+            // list 클래스 부여
+            list.classList.add("list");
+            list.classList.add(`flower-id-${1}`); // test3.js 객체의 고유 id 값
+
+            // delete 클래스를 가진 button 태그 생성
+            const deleteb = document.createElement("button");
+            deleteb.classList.add("delete-btn");
+            //delete 버튼의 X
+            deleteb.textContent = "X";
+
+            // 상품명 생성
+            const fName = document.createElement("p");
+            //상품명의 클래스 부여
+            fName.classList.add("flower-name");
+            // 상품명의 아이디 인덱스 부여
+            fName.id = "name-" + i;
+
+            const fprice = document.createElement("p");
+            fprice.classList.add("flower-price");
+            fprice.id = "price-" + i;
+
+            const minusb = document.createElement("button");
+            minusb.classList.add("minus-btn");
+            minusb.textContent = "-";
+
+            const fnum = document.createElement("p");
+            fnum.classList.add("flower-num");
+            fnum.id = "num-" + i;
+
+            const plusb = document.createElement("button");
+            plusb.classList.add("plus-btn");
+            plusb.textContent = "+";
+
+            // 생성한 태그들 list 의 넣기
+            list.append(deleteb, fName, fprice, minusb, fnum, plusb);
+            //  생성한 list body에 넣기
+            const contents = document.querySelector(".bb-buy-contents");
+            contents.append(list);
+          }
+
+          // 장바구니의 품목갯수마다 열 생성 및 열 마다 데이터값 출력
+          cart.items.forEach((v, i) => {
+            // 아이템 갯수마다 열 생성하는 함수 호출
+            makingRow(v, i);
+            // 인덱스 개수마다 알맞는 아이디 선택
+            const fName = document.querySelector(`#name-${i}`);
+            // 해당아이디의 상품명 가져오기
+            fName.textContent = cart.items[i].name;
+
+            // 가격 생성
+            const fprice = document.querySelector(`#price-${i}`);
+            fprice.textContent = cart.items[i].price * cart.items[i].quantity;
+            // 수량 생성
+            const fnum = document.querySelector(`#num-${i}`);
+            fnum.textContent = cart.items[i].quantity;
+          });
+
+          // 엑스를 누르면 div가 없어지는
+          const deleteBtns = document.querySelectorAll(".delete-btn");
+
+          deleteBtns.forEach((button) => {
+            button.addEventListener("click", () => {
+              // confirm 대화 상자 띄우기
+              const confirmed = confirm("정말로 삭제하시겠습니까?");
+
+              // 삭제하기를 누르면 삭제가 됨
+              if (confirmed) {
+                button.parentElement.remove();
+              }
+            });
+          });
+
+          // 총 금액, 총 수량 구하기
+          const lists = document.querySelectorAll(".list");
+          const div = document.createElement("div");
+          const div2 = document.createElement("div"); // total div
+          // total div
+          let sum = 0;
+          let sum2 = 0;
+
+          // 총 금액부분
+          const price = document.querySelectorAll(".flower-price");
+          price.forEach((value, i) => {
+            sum += Number(value.textContent);
+            // console.log(sum)
+            div.textContent = `총 금액: ${sum.toLocaleString()}원`;
+          });
+          div.classList.add("total-price");
+          const contents = document.querySelector(".bb-buy-contents");
+
+          contents.append(div);
+
+          // 총 수량 부분
+          const nums = document.querySelectorAll(".flower-num");
+          nums.forEach((value, i) => {
+            sum2 += Number(value.textContent);
+          });
+          div2.textContent = `총 수량: ${sum2.toLocaleString()}개`;
+          div2.classList.add("total-nums");
+
+          contents.append(div2);
+
+          //플러스 수량
+          // 플러스버튼에 수량 추가하는 코드
+          const plusBtns = document.querySelectorAll(".plus-btn");
+
+          plusBtns.forEach((button, i) => {
+            button.addEventListener("click", () => {
+              //list(부모 엘리먼트)에서 수량이랑 가격 선택(불러온다? 느낌)
+              const nums = button.parentElement.querySelector(".flower-num");
+              const prices =
+                button.parentElement.querySelector(".flower-price");
+
+              //수량이랑 가격 불러옴
+              const quantity = parseInt(nums.textContent);
+              const price = parseInt(prices.textContent);
+
+              // 수량 1씩 증가
+              const newQuantity = quantity + 1;
+              // 수량 오르는 만큼 가격도 올라가게
+              const newPrice = (price / quantity) * newQuantity;
+
+              // 올라간 거 실시간반영
+              nums.textContent = newQuantity;
+              prices.textContent = newPrice;
+              ++sum2;
+              sum += parseInt(price / quantity);
+              const totalNums = document.querySelector(".total-nums");
+              totalNums.textContent = `총 수량: ${sum2.toLocaleString()}개`;
+
+              const totalPrice = document.querySelector(".total-price");
+              console.log(totalPrice, sum);
+              totalPrice.textContent = `총 금액: ${sum.toLocaleString()}원`;
+            });
+          });
+
+          //  마이너스 수량
+          // 마이너스버튼에 수량 추가하는 코드
+          const minusBtns = document.querySelectorAll(".minus-btn");
+          minusBtns.forEach((button) => {
+            button.addEventListener("click", () => {
+              //list(부모 엘리먼트)에서 수량이랑 가격 선택(불러온다? 느낌)
+              const nums = button.parentElement.querySelector(".flower-num");
+              const prices =
+                button.parentElement.querySelector(".flower-price");
+
+              //수량이랑 가격 불러옴
+              let quantity = parseInt(nums.textContent);
+              let price = parseInt(prices.textContent);
+
+              // 0이면. 감소하지않음
+              if (quantity === 0) {
+                return;
+              }
+
+              // 수량 1씩 감소
+              const newQuantity = quantity - 1;
+
+              // 수량 오르는 만큼 가격도 내려가게
+              const newPrice = (price / quantity) * newQuantity;
+
+              // 내려간 거 실시간반영
+              nums.textContent = newQuantity;
+              prices.textContent = newPrice;
+
+              sum2--;
+              sum -= parseInt(price / quantity);
+
+              const totalNums = document.querySelector(".total-nums");
+              totalNums.textContent = `총 수량: ${sum2.toLocaleString()}개`;
+              const totalPrice = document.querySelector(".total-price");
+              totalPrice.textContent = `총 금액: ${sum.toLocaleString()}원`;
+            });
+          });
+
+          const error = document.querySelector("#error");
+          const fP = document.querySelector(".first-page");
+          const sP = document.querySelector(".second-page");
+          const tP = document.querySelector(".third-page");
+          const foP = document.querySelector(".fourth-page");
+          const confirmB = document.querySelector("#confirm");
+          const approveB = document.querySelector("#approve");
+          const proceedB = document.querySelector("#proceed");
+          const okayB = document.querySelector("#okay");
+          const rejectB = document.querySelector("#reject");
+          const back3 = document.querySelector("#back3");
+          const back4 = document.querySelector("#back4");
+          const pNumber = document.querySelector("#phone-number");
+          confirmB.addEventListener("click", function () {
+            if (pNumber.value.length === 11) {
+              fP.classList.replace("on", "off");
+              sP.classList.add("on");
+              error.classList.replace("on", "off");
+            } else {
+              error.classList.add("on");
+            }
+          });
+          approveB.addEventListener("click", function () {
+            sP.classList.replace("on", "off");
+            tP.classList.add("on");
+          });
+          proceedB.addEventListener("click", function () {
+            tP.classList.replace("on", "off");
+            foP.classList.add("on");
+          });
+          okayB.addEventListener("click", function () {
+            foP.classList.replace("on", "off");
+            window.location = "/index";
+          });
+          rejectB.addEventListener("click", function () {
+            fP.classList.add("on");
+            sP.classList.replace("on", "off");
+          });
+          back3.addEventListener("click", function () {
+            fP.classList.add("on");
+            tP.classList.replace("on", "off");
+          });
+          back4.addEventListener("click", function () {
+            tP.classList.add("on");
+            foP.classList.replace("on", "off");
+            //   메인페이지 가는 이동 만들기
+          });
+
+          const btns = document.querySelectorAll(".number");
+          const reset = document.querySelector("#reset");
+          const confirmNumber = document.querySelector(".checkNumber");
+
+          btns.forEach((v, i) => {
+            v.addEventListener("click", function () {
+              if (pNumber.value.length > 10) {
+                pNumber.value.substring(0, 10);
+              } else {
+                pNumber.value += this.textContent;
+              }
+              confirmNumber.textContent = pNumber.value.replace(
+                /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                `$1-$2-$3`
+              );
+            });
+          });
+
+          reset.addEventListener("click", function () {
+            pNumber.value = pNumber.value.substring(
+              0,
+              pNumber.value.length - 1
+            );
+          });
+          const overlay = document.querySelector("#overlay");
+          const buyBtn = document.querySelector(".bb-pick-up");
+          buyBtn.addEventListener("click", function () {
+            fP.classList.add("on");
+            overlay.classList.add("overlay");
+          });
+        </script>
+      </div>
+      <!--  하단 결제 버튼 페이지-->
+      <footer class="footer">
+        <div class="row">
+          <!--    구매내역 / 장바구니 -->
+          <!--    결제관련 버튼 -->
+          <div class="bb-proceed-btn col-md-12 grey2">
+            <div class="col-sm-12 col-md-12 width100">
+              <button
+                type="button"
+                onclick="location.href='/index'"
+                class="bb-buy-btn"
+              >
+                뒤로가기
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

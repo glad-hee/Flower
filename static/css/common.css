@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+body {
+  background-color: #ffffff;
+  color: #403d3b;
+}
+.color1 {
+  background-color: #f6f4f4;
+}
+.color2 {
+  background-color: #f5f5f4;
+}
+
+.color3 {
+  background-color: #fff2ed;
+}
+
+.color4 {
+  background-color: #ffe4dc;
+}
+.color5 {
+  background-color: #ffd7ca;
+}
+.color6 {
+  background-color: #ffc9b8;
+}
+.t-color {
+  color: #403d3b;
+}
+.b-color {
+  border: 2px solid #f5f5f4 !important;
+}
+
+.color7 {
+  background-color: #fcb8a9;
+}

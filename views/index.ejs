@@ -10,15 +10,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <script defer src="/static/js/index.js"></script>
+    <!-- <script defer src="/static/js/openModal.js"></script> -->
+    <!-- 
+    <script type="module">
+      import Customer from "/static/js/index.js";
+      window.customer = new Customer();
+      console.log(">>", window.customer);
+    </script> -->
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap-grid.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <link rel="stylesheet" href="/static/css/index.css" />
+    <link rel="stylesheet" href="/static/css/common.css" />
   </head>
-  <body>
+  <body class="t-color">
     <div
-      class="bb-container container-fluid g-0 col-md-offset-4 col-md-6"
+      class="bb-container color3 container-fluid g-0 col-md-offset-4 col-md-6"
       id="body"
     >
       <header class="row bb-header col-xs-10 m-0">
@@ -28,25 +41,25 @@
 
         <div class="bb-btn-wrap row flex-nowrap">
           <div
-            class="bb-btn1 col-sm-3 col-md-3 grey2"
+            class="bb-btn1 col-sm-3 col-md-3 color7 b-color"
             onclick="filterItem('all')"
           >
-            전체 보기
+            MAIN
           </div>
           <div
-            class="bb-btn2 col-sm-3 col-md-3 grey3"
+            class="bb-btn2 col-sm-3 col-md-3 color4 b-color"
             onclick="filterItem('best')"
           >
             BEST
           </div>
           <div
-            class="bb-btn3 col-sm-3 col-md-3 grey2"
+            class="bb-btn3 col-sm-3 col-md-3 color4 b-color"
             onclick="filterItem('new')"
           >
             NEW
           </div>
           <div
-            class="bb-btn3 col-sm-3 col-md-3 grey5"
+            class="bb-btn3 col-sm-3 col-md-3 color4 b-color"
             onclick="filterItem('sale')"
           >
             SALE
@@ -182,20 +195,20 @@
       <footer class="footer">
         <div class="row">
           <!--    구매내역 / 장바구니 -->
-          <div class="bb-history col-md-7 grey3 cart">
+          <div class="bb-history col-md-7 color4 cart">
             <p class="bb-total">Order</p>
             <ul class="cart-items"></ul>
             <p class="bb-sum cart-total"></p>
           </div>
           <!--    결제관련 버튼 -->
-          <div class="bb-proceed-btn col-md-5 grey2 row">
+          <div class="bb-proceed-btn col-md-5 color4 row">
             <div class="col-sm-12 col-md-6">
               <!-- 다음페이지 링크 달것 -->
               <button
                 type="button"
-                onclick="location.href='page2.html'"
                 class="bb-buy-btn"
                 id="checkout"
+                onclick="location.href='/index/page2'"
               >
                 Check out
               </button>
@@ -222,7 +235,7 @@
     </div>
 
     <!-- 꽃 선택시 modal창 -->
-    <div class="product product1" id="modal">
+    <div class="product product1 animate__animated animate__zoomIn" id="modal">
       <div class="modal-container">
         <img id="modal-image" src="" alt="" />
 

@@ -172,18 +172,19 @@ clearBtn.addEventListener("click", function () {
 });
 
 // 선택한 꽃에 따라 알맞는 모달창 띄우기
-function openModal($) {
-  console.log(product, $);
+function openModal(index) {
+  console.log(product, index);
   document.getElementById("modal").style.display = "block";
   document.getElementById("body").style.opacity = "0.5";
 
-  document.getElementById("modal-image").src = product[$].img;
-  document.getElementById("modal-image").alt = product[$].name;
-  document.querySelector("h3").innerHTML = product[$].name;
-  document.getElementById("product-price").innerHTML = product[$].priceView;
+  document.getElementById("modal-image").src = product[index].img;
+  document.getElementById("modal-image").alt = product[index].name;
+  document.querySelector("h3").innerHTML = product[index].name;
+  document.getElementById("product-price").innerHTML = product[index].priceView;
 
+  // addToCart에 알맞은 객체 찾기
   document.getElementById("purchase").onclick = function () {
-    addToCart($);
+    addToCart(index);
     closeModal();
   };
 }
@@ -225,6 +226,7 @@ function addToCart(index) {
       quantity: 1,
       totalPrice: selectedProduct.price,
     });
+    console.log(cart);
   }
 
   cart.total += selectedProduct.price;
@@ -245,6 +247,7 @@ function addToCart(index) {
     plusButton.addEventListener("click", () => {
       plusQuantity(item);
       updateCart();
+      console.log(cart);
     });
     li.appendChild(plusButton);
 
@@ -443,3 +446,56 @@ function searchItems() {
     }
   }
 }
+
+// // test
+// export default class Customer {
+//   constructor() {
+//     this.test();
+//     // this.openModal();
+//   }
+//   openModal(index) {
+//     console.log(product, index);
+//     document.getElementById("modal").style.display = "block";
+//     document.getElementById("body").style.opacity = "0.5";
+
+//     document.getElementById("modal-image").src = product[index].img;
+//     document.getElementById("modal-image").alt = product[index].name;
+//     document.querySelector("h3").innerHTML = product[index].name;
+//     document.getElementById("product-price").innerHTML =
+//       product[index].priceView;
+
+//     // addToCart에 알맞은 객체 찾기
+//     document.getElementById("purchase").onclick = function () {
+//       addToCart(index);
+//       closeModal();
+//     };
+//   }
+//   test() {
+//     console.log("click!!!!!!!!");
+//   }
+// }
+
+// const test = document.querySelectorAll(".bb-item-img > img");
+
+// test.forEach((v, i) => {
+//   v.addEventListener("click", function () {
+//     openModal(i);
+//   });
+// });
+
+// let newCart = 0;
+
+// const checkout = document.querySelector("#checkout");
+// checkout.addEventListener("click", function () {
+//   console.log(newCart);
+//   newCart = {
+//     items: cart.items,
+//     total: cart.total,
+//     quantity: cart.quantity,
+//   };
+//   console.log(newCart);
+//   location.href = "/index/page2";
+// });
+
+// export default newCart;
+// // module.exports = cart;

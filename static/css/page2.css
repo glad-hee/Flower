@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: ivory;
+}
+
+.bb-container {
+  position: relative;
+  border: 2px solid #d9e471;
+  border-radius: 20px;
+  background-color: #f6f8dc;
+  height: 100%;
+}
+
+.bb-header {
+  /*width: 100vw;*/
+  height: 140px;
+}
+
+.bb-container {
+  overflow: hidden;
+}
+
+/* 커스텀 레이아웃*/
+/* 로고 센터*/
+.bb-logo-title {
+  text-align: center;
+}
+
+/* h1 텍스트 지우기*/
+.bb-logo-title h1 {
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+/*  h1 백그라운드 로고 만들기*/
+.bb-logo-title h1 {
+  width: 100%;
+  background: url(https://place-hold.it/100x70) no-repeat center;
+}
+
+.bb-logo {
+  height: 100%;
+}
+
+/* 상품 카테고리 탭 */
+
+/* 상품 메인 컨텐츠 */
+.bb-item-details,
+.bb-item-title {
+  text-align: center;
+}
+
+/*  상품 메인 스크롤 */
+.bb-buy-contents {
+  height: calc(100vh - 60vh);
+  overflow: auto;
+}
+
+/*  가격 정렬 우측*/
+.bb-item-price {
+  text-align: right;
+}
+
+img {
+  max-width: 100%;
+}
+
+.bb-proceed-btn {
+  display: flex;
+}
+
+.bb-history {
+  height: 20vh;
+}
+
+.bb-buy-btn {
+  width: 100%;
+  height: 5vh;
+}
+.bb-proceed-btn {
+  padding-right: 0 !important;
+}
+
+/*  footer*/
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.bb-detail {
+  position: relative;
+  margin-top: 5%;
+}
+
+.first-page,
+.second-page,
+.third-page,
+.fourth-page {
+  text-align: center;
+  position: absolute;
+  border-radius: 20px;
+  width: 80%;
+  padding: 30px 10px;
+}
+
+.on {
+  display: block !important;
+}
+
+.off {
+  display: none;
+}
+.bb-buy-contents {
+  position: relative;
+}
+/*//클릭 방지용*/
+.overlay {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(100, 100, 100, 0);
+}
+
+.bb-pick-up {
+  margin-top: 2vh;
+  width: 100%;
+  height: 6vh;
+  border: 0;
+  outline: 0;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.btn-wrap button,
+#back3,
+#proceed,
+#back4,
+#okay {
+  background-color: #fff;
+  outline: 0;
+  border: 0;
+  padding: 8px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.number {
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
+}
+
+.logo-image {
+  height: 70px;
+  margin-top: 3%;
+}
